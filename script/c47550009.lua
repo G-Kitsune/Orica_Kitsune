@@ -10,7 +10,7 @@ function c47550009.initial_effect(c)
 	e0:SetValue(ATTRIBUTE_DARK)
 	c:RegisterEffect(e0)
 
-	--light:pierce
+	--light:specialsummon
 local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
