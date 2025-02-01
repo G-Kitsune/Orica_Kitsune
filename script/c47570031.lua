@@ -124,9 +124,8 @@ function cm.spop(e,tp,eg,ep,ev,re,r,rp)
             Duel.Remove(mat,POS_FACEUP,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 			--Duel.SendtoDeck(mat,nil,2,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 			Duel.BreakEffect()
-			Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
-            Duel.BreakEffect()
-            Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT)
+			if Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) then
+            Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT) end
 		else
 			local mat2=Duel.SelectFusionMaterial(tp,tc,mg3,nil,chkf)
 			local fop=ce:GetOperation()
