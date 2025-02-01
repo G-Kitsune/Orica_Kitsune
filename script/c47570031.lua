@@ -17,16 +17,18 @@ function cm.initial_effect(c)
 	e0:SetOperation(cm.eqop)
 	c:RegisterEffect(e0)
 
-    --fusion
-    local e1=Effect.CreateEffect(c)
-    e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_REMOVE+CATEGORY_FUSION_SUMMON)
-    e1:SetType(EFFECT_TYPE_QUICK_O)
-    e1:SetRange(LOCATION_SZONE)
-	e1:SetCode(EVENT_FREE_CHAIN)
-    e1:SetCountLimit(1,m+1)
-    e1:SetTarget(cm.sptg)
-    e1:SetOperation(cm.spop)
-    c:RegisterEffect(e1)
+	
+	--equip
+	local e1=Effect.CreateEffect(c)
+	e1:SetCategory(CATEGORY_EQUIP)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
+	e1:SetCode(EVENT_TO_GRAVE)
+	e1:SetCountLimit(1,m)
+	e1:SetCondition(cm.eqcon2)
+	e1:SetTarget(cm.eqtg2)
+	e1:SetOperation(cm.eqop2)
+	c:RegisterEffect(e1)
 end
 
 function cm.eqfilter(c)
