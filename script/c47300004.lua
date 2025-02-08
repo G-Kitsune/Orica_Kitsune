@@ -10,7 +10,7 @@ function cm.initial_effect(c)
 	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e1:SetCode(EVENT_REMOVE)
+	e1:SetCode(EVENT_TO_GRAVE+EVENT_REMOVE)
 	e1:SetCountLimit(1,m)
 	e1:SetTarget(cm.thtg)
 	e1:SetOperation(cm.thop)
@@ -36,7 +36,7 @@ cm.square_mana={ATTRIBUTE_EARTH,ATTRIBUTE_LIGHT,ATTRIBUTE_LIGHT}
 cm.custom_type=CUSTOMTYPE_SQUARE
 
 function cm.thfilter(c,e,tp)
-	return c:IsSetCard(0xcce) and c:IsAbleToHand() and not c:IsCode(m)and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED))
+	return c:IsSetCard(0xcce) and c:IsAbleToHand() and not c:IsCode(m) and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED))
 end
 function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 

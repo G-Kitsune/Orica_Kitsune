@@ -10,7 +10,7 @@ function cm.initial_effect(c)
 	e2:SetDescription(aux.Stringid(m,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_REMOVED)
+	e2:SetRange(LOCATION_GRAVE+LOCATION_REMOVED)
 	e2:SetCountLimit(1,m)
 	e2:SetCost(cm.sscost)
 	e2:SetTarget(cm.sstg)
@@ -38,22 +38,22 @@ cm.custom_type=CUSTOMTYPE_SQUARE
 
 
 function cm.costfilter(c,e)
-	return c:IsSetCard(0xcce) and c:IsAbleToRemoveAsCost() and c:IsType(TYPE_SYNCHRO)
+	return (c:IsSetCard(0xcce) or c:IsType(TYPE_SYNCHRO)) and c:IsAbleToRemoveAsCost()
 end
 function cm.sscost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(cm.costfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(cm.costfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,cm.costfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,cm.costfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function cm.sstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false)  and e:GetHandler():IsLocation(LOCATION_REMOVED) end
+		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) and e:GetHandler():IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
 function cm.ssop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsLocation(LOCATION_REMOVED) then
+	if c:IsRelateToEffect(e) and c:IsLocation((LOCATION_GRAVE+LOCATION_REMOVED) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

@@ -12,6 +12,7 @@ function cm.initial_effect(c)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_SPSUMMON_CONDITION)
+	e0:SetRange(LOCATION_EXTRA)
 	e0:SetValue(aux.synlimit)
 	c:RegisterEffect(e0)
 

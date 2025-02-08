@@ -37,7 +37,7 @@ cm.custom_type=CUSTOMTYPE_SQUARE
 
 
 function cm.spfilter(c,e,tp)
-	return c:IsSetCard(0xcce) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and c:IsLevelBelow(3) and not c:IsCode(m)
+	return c:IsSetCard(0xcce) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and not c:IsCode(m)
 end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 
